@@ -1,9 +1,36 @@
 import axios from "axios";
 import qs from 'qs'
+import {runWithLock} from "localstorage-lock";
+
+// put mutex into localstorage
+localStorage.setItem('auth-key', 'auth-key');
 
 const axiosInstance = axios.create({});
 
+axiosInstance.interceptors.response.use(
+    function (response) {
+        return response;
+    }, function (error) {
+        if (401 === error.response.status) {
+            runWithLock('auth-key', () => {
+                AuthenticationService.updateAuthTokens()
+                    .then(() => {
+                        AuthenticationService.acceptAuthTokens().then(() => {
+                            return axiosInstance.request(error.config);
+                        })
+                    })
+                    .catch(() => {
+                        // but maybe window.location = '/login'; would be better
+                        this.props.history.push('/login');
+                    })
+            }, {timeout: 5000});
+        } else {
+            return Promise.reject(error);
+        }
+    });
+
 const AuthenticationService = {
+
     login(email, password) {
         return axiosInstance.post('/api/auth',
             qs.stringify({
@@ -14,7 +41,15 @@ const AuthenticationService = {
     },
 
     logout() {
-        axiosInstance.get('/api/logout');
+        return axiosInstance.get('/api/logout');
+    },
+
+    updateAuthTokens() {
+        return axiosInstance.get('/api/auth/refresh')
+    },
+
+    acceptAuthTokens() {
+        return axiosInstance.get('/api/auth/refresh_update')
     }
 };
 
