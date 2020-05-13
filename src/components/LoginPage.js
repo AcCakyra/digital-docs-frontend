@@ -12,7 +12,7 @@ import Container from '@material-ui/core/Container';
 import {Alert} from '@material-ui/lab';
 import Collapse from '@material-ui/core/Collapse';
 
-import AuthenticationService from "./../../services/AuthenticationService";
+import AuthenticationService from "./../services/AuthenticationService";
 
 const styles = theme => ({
     paper: {
@@ -89,7 +89,7 @@ class LoginPage extends React.Component {
                     </Typography>
                     <Collapse className={classes.error} in={this.state.loginError}>
                         <Alert severity="error">
-                            Неверный логин или пароль
+                            Неверный e-mail или пароль
                         </Alert>
                     </Collapse>
                     <form className={classes.form} noValidate>
