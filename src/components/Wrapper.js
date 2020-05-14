@@ -2,8 +2,7 @@ import * as React from "react";
 import {NavLink, withRouter} from "react-router-dom";
 
 import {
-    Site,
-    RouterContextProvider,
+    Site, RouterContextProvider, Grid,
 } from "tabler-react";
 
 
@@ -63,13 +62,22 @@ class Wrapper extends React.Component<Props> {
                 footerProps={{
                     copyright: (
                         <React.Fragment>
-                            Copyright © 2020
+                            Copyright © {new Date().getFullYear()}
                             {" "}
-                            <a href="https://github.com/BlockTeam4Boys"
-                               target="_blank">
-                                BlockTeam4Boys
-                            </a>{" "}
                             All rights reserved.
+                        </React.Fragment>
+                    ),
+                    nav: (
+                        <React.Fragment>
+                            <Grid.Col auto={true}>
+                                Created by
+                                {" "}
+                                <a href="https://github.com/BlockTeam4Boys"
+                                   rel="noopener noreferrer"
+                                   target="_blank">
+                                    BlockTeam4Boys
+                                </a>
+                            </Grid.Col>
                         </React.Fragment>
                     ),
                 }}
