@@ -1,11 +1,9 @@
-import axios from "axios";
 import qs from 'qs'
 import {runWithLock} from "localstorage-lock";
+import axiosInstance from "./index";
 
 // put mutex into localstorage
 localStorage.setItem('auth-key', 'auth-key');
-
-const axiosInstance = axios.create({});
 
 axiosInstance.interceptors.response.use(
     function (response) {
@@ -27,7 +25,8 @@ axiosInstance.interceptors.response.use(
         } else {
             return Promise.reject(error);
         }
-    });
+    }
+);
 
 const AuthenticationService = {
 
