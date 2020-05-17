@@ -5,7 +5,6 @@ import {
     Site, RouterContextProvider, Grid,
 } from "tabler-react";
 
-
 type Props = {|
     +children: React.Node,
 |};
