@@ -15,31 +15,41 @@ function Home() {
                         <Grid.Col lg={8}>
                             <Card>
                                 <Card.Header>
-                                    <Card.Title>Внесите данные диплома</Card.Title>
+                                    <Card.Title>
+                                        Запрос диплома из ВУЗа партнера
+                                    </Card.Title>
                                 </Card.Header>
                                 <Card.Body>
                                     <Form>
-                                        <Form.Group isRequired={true}>
-                                            <Form.Label>Номер диплома</Form.Label>
-                                            <Form.Input placeholder="3432423424"/>
+                                        <Form.Group label="Консорциум">
+                                            <Form.SelectGroup pills={true}>
+                                                <Form.SelectGroupItem
+                                                    label="Томские ВУЗы"
+                                                    name="associations"
+                                                    value="Томские ВУЗы"
+                                                />
+                                                <Form.SelectGroupItem
+                                                    label="Лига Плюща"
+                                                    name="associations"
+                                                    value="Лига Плюща"
+                                                />
+                                            </Form.SelectGroup>
                                         </Form.Group>
-                                        <Form.Group isRequired={true}>
-                                            <Form.Label>ВУЗ</Form.Label>
-                                            <Form.Radio
-                                                label="ТПУ"
-                                                name="university"
-                                                value="ТПУ"
-                                            />
-                                            <Form.Radio
-                                                label="ТГУ"
-                                                name="university"
-                                                value="ТГУ"
-                                            />
-                                            <Form.Radio
-                                                label="ТГПУ"
-                                                name="university"
-                                                value="ТГПУ"
-                                            />
+                                        <Form.Group className="mb-md-5" label="ВУЗ">
+                                            <Form.Select name="university">
+                                                <option>
+                                                    ТУСУР
+                                                </option>
+                                                <option>
+                                                    ТГУ
+                                                </option>
+                                                <option>
+                                                    ТПУ
+                                                </option>
+                                            </Form.Select>
+                                        </Form.Group>
+                                        <Form.Group className="mb-md-5" label="Номер диплома">
+                                            <Form.Input type="text" placeholder="3432423424"/>
                                         </Form.Group>
                                         <Form.Footer>
                                             <Button color="primary" block>
