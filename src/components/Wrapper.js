@@ -31,7 +31,7 @@ const navBarItems: Array<navItem> = [
     {
         value: "Проверить диплом",
         to: "/",
-        icon: "home",
+        icon: "check",
         LinkComponent: withRouter(NavLink),
         useExact: true,
     },
