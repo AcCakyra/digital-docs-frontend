@@ -19,7 +19,7 @@ axiosInstance.interceptors.response.use(
                     })
                     .catch(() => {
                         // but maybe window.location = '/login'; would be better
-                        this.props.history.push('/login');
+                        window.location = '/login';
                     })
             }, {timeout: 5000});
         } else {

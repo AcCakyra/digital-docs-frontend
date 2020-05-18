@@ -12,7 +12,7 @@ class MainPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: {},
+            user: null,
         };
     }
 
@@ -29,6 +29,10 @@ class MainPage extends React.Component {
     }
 
     render(): React.ReactNode {
+        if (!this.state.user) {
+            return null;
+        }
+
         return (
             <Wrapper>
                 <Page.Content>
