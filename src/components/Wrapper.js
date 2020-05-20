@@ -9,34 +9,6 @@ type Props = {|
     +children: React.Node,
 |};
 
-type subNavItem = {|
-    +value: string,
-    +to?: string,
-    +icon?: string,
-    +LinkComponent?: React.ElementType,
-    +useExact?: boolean,
-|};
-
-type navItem = {|
-    +value: string,
-    +to?: string,
-    +icon?: string,
-    +active?: boolean,
-    +LinkComponent?: React.ElementType,
-    +subItems?: Array<subNavItem>,
-    +useExact?: boolean,
-|};
-
-const navBarItems: Array<navItem> = [
-    {
-        value: "Проверить диплом",
-        to: "/",
-        icon: "check",
-        LinkComponent: withRouter(NavLink),
-        useExact: true,
-    },
-];
-
 const accountDropdownProps = {
     name: "Евгений Митикари",
     description: "Описание роли челика",
@@ -56,7 +28,24 @@ class Wrapper extends React.Component<Props> {
                     imageURL: "./images/tusur_logo.png",
                     accountDropdown: accountDropdownProps,
                 }}
-                navProps={{itemsObjects: navBarItems}}
+                navProps={{
+                    itemsObjects: [
+                        {
+                            value: "Проверить диплом",
+                            to: "/",
+                            icon: "check",
+                            LinkComponent: withRouter(NavLink),
+                            useExact: true,
+                        },
+                        {
+                            value: "Мой ВУЗ",
+                            to: "/admin",
+                            icon: "home",
+                            LinkComponent: withRouter(NavLink),
+                            useExact: true,
+                        },
+                    ]
+                }}
                 routerContextComponentType={withRouter(RouterContextProvider)}
                 footerProps={{
                     copyright: (
