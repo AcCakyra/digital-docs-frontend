@@ -13,9 +13,7 @@ axiosInstance.interceptors.response.use(
             runWithLock('auth-key', () => {
                 AuthenticationService.updateAuthTokens()
                     .then(() => {
-                        AuthenticationService.acceptAuthTokens().then(() => {
-                            return axiosInstance.request(error.config);
-                        })
+                        return axiosInstance.request(error.config);
                     })
                     .catch(() => {
                         window.location = '/login';
@@ -43,12 +41,8 @@ const AuthenticationService = {
     },
 
     updateAuthTokens() {
-        return axiosInstance.get('/api/auth/refresh')
+        return axiosInstance.get('/api/refresh')
     },
-
-    acceptAuthTokens() {
-        return axiosInstance.get('/api/auth/refresh_update')
-    }
 };
 
 export default AuthenticationService;
