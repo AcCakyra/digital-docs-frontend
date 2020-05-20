@@ -24,3 +24,9 @@ yarn-error.log*
 
 package-lock.json
 yarn.lock
+/.idea/.gitignore
+/.idea/digital-docs-frontend.iml
+/.idea/encodings.xml
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/vcs.xml
