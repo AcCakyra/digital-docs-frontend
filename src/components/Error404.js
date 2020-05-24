@@ -7,7 +7,7 @@ import {
 class Error404 extends React.Component {
 
     back = () => {
-        this.props.history.goBack();
+        this.props.history.push('/');
     };
 
     render(): React.ReactNode {
