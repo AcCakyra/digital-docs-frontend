@@ -4,6 +4,7 @@ import LoginPage from "./components/LoginPage";
 import MainPage from "./components/MainPage";
 import ForgotPassword from "./components/ForgotPassword";
 import AdminPage from "./components/AdminPage";
+import Error404 from "./components/Error404";
 
 import "tabler-react/dist/Tabler.css";
 
@@ -17,7 +18,8 @@ function App(props: Props): React.Node {
                     <Route exact path="/login" component={LoginPage}/>
                     <Route exact path="/forgot_password" component={ForgotPassword}/>
                     <Route exact path="/admin" component={AdminPage}/>
-                    <Route path="/" component={MainPage}/>
+                    <Route exact path="/" component={MainPage}/>
+                    <Route component={Error404} />
                 </Switch>
             </Router>
         </React.StrictMode>
