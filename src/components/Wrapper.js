@@ -4,20 +4,17 @@ import {NavLink, withRouter} from "react-router-dom";
 import {
     Site, RouterContextProvider, Grid,
 } from "tabler-react";
+import AuthenticationService from "../services/AuthenticationService";
 
 type Props = {|
     +children: React.Node,
 |};
 
-const accountDropdownProps = {
-    name: "Евгений Митикари",
-    description: "Описание роли челика",
-    options: [
-        {icon: "log-out", value: "Выйти"},
-    ],
-};
-
 class Wrapper extends React.Component<Props> {
+
+    logout = () => {
+        return AuthenticationService.logout();
+    }
 
     render(): React.Node {
         return (
@@ -26,7 +23,13 @@ class Wrapper extends React.Component<Props> {
                     href: "/",
                     alt: "Digital docs",
                     imageURL: "./images/tusur_logo.png",
-                    accountDropdown: accountDropdownProps,
+                    accountDropdown: {
+                        name: this.props.email,
+                        description: this.props.role,
+                        options: [
+                            {icon: "log-out", value: "Выйти", onClick: this.logout},
+                        ],
+                    },
                 }}
                 navProps={{
                     itemsObjects: [
@@ -39,11 +42,11 @@ class Wrapper extends React.Component<Props> {
                         },
                         {
                             value: "Мой ВУЗ",
-                            to: "/admin",
+                            to: "/home",
                             icon: "home",
                             LinkComponent: withRouter(NavLink),
                             useExact: true,
-                        },
+                        }
                     ]
                 }}
                 routerContextComponentType={withRouter(RouterContextProvider)}

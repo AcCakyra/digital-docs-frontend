@@ -21,8 +21,9 @@ class MainPage extends React.Component {
             this.setState({
                 user: user
             })
-        });
-    }
+            sessionStorage.setItem('user', JSON.stringify(this.state.user));
+        })
+    };
 
     getMe = async () => {
         return await UserService.getMe();
@@ -32,9 +33,10 @@ class MainPage extends React.Component {
         if (!this.state.user) {
             return null;
         }
-
         return (
-            <Wrapper>
+            <Wrapper
+                email={this.state.user.Email}
+                role={this.state.user.Role}>
                 <Page.Content>
                     <Grid.Row cards={true}>
                         <Grid.Col lg={8}>

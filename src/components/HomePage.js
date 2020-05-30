@@ -7,7 +7,7 @@ import {
 import Wrapper from "./Wrapper";
 import UserService from "../services/UserService";
 
-class AdminPage extends React.Component {
+class HomePage extends React.Component {
 
     constructor(props) {
         super(props);
@@ -17,21 +17,15 @@ class AdminPage extends React.Component {
     }
 
     componentDidMount(): void {
-        this.getMe().then(user => {
-            this.setState({
-                user: user
-            })
-        });
-    }
-
-    getMe = async () => {
-        return await UserService.getMe();
+        this.setState({
+            user: JSON.parse(sessionStorage.user)
+        })
     }
 
     render(): React.ReactNode {
-        // if (!this.state.user) {
-        //     return null;
-        // }
+        if (!this.state.user || this.state.user.Role !== 'Admin') {
+            return null;
+        }
 
         return (
             <Wrapper>
@@ -73,4 +67,4 @@ class AdminPage extends React.Component {
     };
 }
 
-export default AdminPage;
+export default HomePage;
