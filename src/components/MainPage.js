@@ -5,7 +5,6 @@ import {
 } from "tabler-react";
 
 import Wrapper from "./Wrapper";
-import UserService from "../services/UserService";
 
 class MainPage extends React.Component {
 
@@ -17,16 +16,9 @@ class MainPage extends React.Component {
     }
 
     componentDidMount(): void {
-        this.getMe().then(user => {
-            this.setState({
-                user: user
-            })
-            sessionStorage.setItem('user', JSON.stringify(this.state.user));
+        this.setState({
+            user: JSON.parse(sessionStorage.user)
         })
-    };
-
-    getMe = async () => {
-        return await UserService.getMe();
     }
 
     render(): React.ReactNode {
@@ -48,31 +40,15 @@ class MainPage extends React.Component {
                                 </Card.Header>
                                 <Card.Body>
                                     <Form>
-                                        <Form.Group label="Консорциум">
-                                            <Form.SelectGroup pills={true}>
-                                                <Form.SelectGroupItem
-                                                    label="Томские ВУЗы"
-                                                    name="associations"
-                                                    value="Томские ВУЗы"
-                                                />
-                                                <Form.SelectGroupItem
-                                                    label="Лига Плюща"
-                                                    name="associations"
-                                                    value="Лига Плюща"
-                                                />
-                                            </Form.SelectGroup>
-                                        </Form.Group>
                                         <Form.Group className="mb-md-5" label="ВУЗ">
                                             <Form.Select name="university">
-                                                <option>
-                                                    ТУСУР
-                                                </option>
-                                                <option>
-                                                    ТГУ
-                                                </option>
-                                                <option>
-                                                    ТПУ
-                                                </option>
+                                                {
+                                                    Object.values(this.state.user.AllowAccessTo)
+                                                        .map(function (org) {
+                                                                return <option>{org}</option>
+                                                            }
+                                                        )
+                                                }
                                             </Form.Select>
                                         </Form.Group>
                                         <Form.Group className="mb-md-5" label="Номер диплома">

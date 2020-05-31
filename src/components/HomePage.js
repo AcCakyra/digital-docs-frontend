@@ -1,11 +1,10 @@
 import * as React from "react";
 
 import {
-    Grid, Card, List, Page,
+    Grid, Card, List, Page, Form,
 } from "tabler-react";
 
 import Wrapper from "./Wrapper";
-import UserService from "../services/UserService";
 
 class HomePage extends React.Component {
 
@@ -23,12 +22,14 @@ class HomePage extends React.Component {
     }
 
     render(): React.ReactNode {
-        if (!this.state.user || this.state.user.Role !== 'Admin') {
+        if (!this.state.user) {
             return null;
         }
 
         return (
-            <Wrapper>
+            <Wrapper
+                email={this.state.user.Email}
+                role={this.state.user.Role}>
                 <Page.Content>
                     <Grid.Row cards={true}>
                         <Grid.Col width={12} sm={12} md={7} lg={7}>
@@ -40,10 +41,13 @@ class HomePage extends React.Component {
                                 </Card.Header>
                                 <Card.Body>
                                     <List.Group>
-                                        <List.GroupItem action>
-                                            ТПУ
-                                        </List.GroupItem>
-                                        <List.GroupItem action>ТГУ</List.GroupItem>
+                                        {
+                                            Object.values(this.state.user.AllowAccessTo)
+                                                .map(function (org) {
+                                                        return <List.GroupItem action>{org}</List.GroupItem>
+                                                    }
+                                                )
+                                        }
                                     </List.Group>
                                 </Card.Body>
                             </Card>
@@ -56,7 +60,7 @@ class HomePage extends React.Component {
                                     </Card.Title>
                                 </Card.Header>
                                 <Card.Body>
-                                    ТУСУР
+                                    {this.state.user.OrganizationName}
                                 </Card.Body>
                             </Card>
                         </Grid.Col>
