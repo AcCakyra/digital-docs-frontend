@@ -31,10 +31,9 @@ class Error404 extends React.Component {
                                 onClick={this.back}
                                 color="primary"
                                 square>
-                                Вернуться назад
+                                Вернуться домой
                             </Button>
                         </Grid.Col>
-
                     </Grid.Row>
                 </Card.Body>
             </div>
