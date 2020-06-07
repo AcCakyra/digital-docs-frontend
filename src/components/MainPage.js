@@ -68,6 +68,18 @@ class MainPage extends React.Component {
                                         <Form.Group className="mb-md-5" label="Номер диплома">
                                             <Form.Input type="text" placeholder="3432423424"/>
                                         </Form.Group>
+                                        <Form.Group className="mb-md-5" label="Имя">
+                                            <Form.Input type="text" placeholder="Василий"/>
+                                        </Form.Group>
+                                        <Form.Group className="mb-md-5" label="Фамилия">
+                                            <Form.Input type="text" placeholder="Васильев"/>
+                                        </Form.Group>
+                                        <Form.Group className="mb-md-5" label="Специальность">
+                                            <Form.Input type="text" placeholder="Программная инженерия"/>
+                                        </Form.Group>
+                                        <Form.Group className="mb-md-5" label="Год выпуска">
+                                            <Form.Input type="text" placeholder="2020"/>
+                                        </Form.Group>
                                         <Form.Footer>
                                             <Button color="primary" block>
                                                 Получить
