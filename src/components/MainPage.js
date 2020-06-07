@@ -5,6 +5,7 @@ import {
 } from "tabler-react";
 
 import Wrapper from "./Wrapper";
+import UserService from "../services/UserService";
 
 class MainPage extends React.Component {
 
@@ -16,9 +17,22 @@ class MainPage extends React.Component {
     }
 
     componentDidMount(): void {
-        this.setState({
-            user: JSON.parse(sessionStorage.user)
-        })
+        if (sessionStorage.getItem('user') === null) {
+            this.getMe().then(user => {
+                sessionStorage.setItem('user', JSON.stringify(user));
+                this.setState({
+                    user: JSON.parse(sessionStorage.user)
+                })
+            })
+        } else {
+            this.setState({
+                user: JSON.parse(sessionStorage.user)
+            })
+        }
+    }
+
+    getMe = () => {
+        return UserService.getMe();
     }
 
     render(): React.ReactNode {

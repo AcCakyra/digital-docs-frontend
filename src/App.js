@@ -11,16 +11,6 @@ import UserService from "./services/UserService";
 
 class App extends React.Component {
 
-    componentDidMount(): void {
-        this.getMe().then(user => {
-            sessionStorage.setItem('user', JSON.stringify(user));
-        })
-    };
-
-    getMe = () => {
-        return UserService.getMe();
-    }
-
     render() {
         return (
             <React.StrictMode>
