@@ -7,7 +7,7 @@ import {
 import Wrapper from "./Wrapper";
 import UserService from "../services/UserService";
 
-class MainPage extends React.Component {
+class DocumentPage extends React.Component {
 
     constructor(props) {
         super(props);
@@ -88,6 +88,18 @@ class MainPage extends React.Component {
                                     </Form>
                                 </Card.Body>
                             </Card>
+                            <Card>
+                                <Card.Header>
+                                    <Card.Title>
+                                        Проверка образовательного документа
+                                    </Card.Title>
+                                </Card.Header>
+                                <Card.Body>
+                                    <Form.Group label="Выберите файл для проверки">
+                                        <Form.FileInput />
+                                    </Form.Group>
+                                </Card.Body>
+                            </Card>
                         </Grid.Col>
                     </Grid.Row>
                 </Page.Content>
@@ -96,4 +108,4 @@ class MainPage extends React.Component {
     };
 }
 
-export default MainPage;
+export default DocumentPage;

@@ -53,57 +53,54 @@ class LoginPage extends React.Component {
     }
 
     render(): React.ReactNode {
-
         return (
-            <Page.Content className="page">
-                <Grid.Row cards={true}>
-                    <Grid.Col lg={5} md={7} sm={8} xs={9} className="mx-auto">
-                        {this.state.error !== "" ?
-                            <Alert type="danger" icon="alert-triangle">
-                                {this.state.error}
-                            </Alert>
-                            :
-                            null
-                        }
-                        <Card>
-                            <Card.Header>
-                                <Card.Title>
-                                    Войти в аккаунт
-                                </Card.Title>
-                            </Card.Header>
-                            <Card.Body>
-                                <Form onSubmit={this.login}>
-                                    <Form.Group label="Email">
-                                        <Form.Input
-                                            name="email"
-                                            placeholder="Email"
-                                            autoComplete="email"
-                                        />
-                                    </Form.Group>
-                                    <Form.Group label="Пароль">
-                                        <Form.Input
-                                            name="password"
-                                            placeholder="Пароль"
-                                            type="password"
-                                        />
-                                    </Form.Group>
-                                    <Form.Footer>
-                                        <Button
-                                            type="submit"
-                                            color="primary" block>
-                                            Войти
-                                        </Button>
-                                    </Form.Footer>
-                                </Form>
-                            </Card.Body>
-                            <Button color="secondary"
-                                    onClick={this.forgotPassword}>
-                                Забыли пароль?
-                            </Button>
-                        </Card>
-                    </Grid.Col>
-                </Grid.Row>
-            </Page.Content>
+            <div className="page">
+                <Grid.Col lg={5} md={7} sm={8} xs={9} className="mx-auto">
+                    {this.state.error !== "" ?
+                        <Alert type="danger" icon="alert-triangle">
+                            {this.state.error}
+                        </Alert>
+                        :
+                        null
+                    }
+                    <Card>
+                        <Card.Header>
+                            <Card.Title>
+                                Войти в аккаунт
+                            </Card.Title>
+                        </Card.Header>
+                        <Card.Body>
+                            <Form onSubmit={this.login}>
+                                <Form.Group label="Email">
+                                    <Form.Input
+                                        name="email"
+                                        placeholder="Email"
+                                        autoComplete="email"
+                                    />
+                                </Form.Group>
+                                <Form.Group label="Пароль">
+                                    <Form.Input
+                                        name="password"
+                                        placeholder="Пароль"
+                                        type="password"
+                                    />
+                                </Form.Group>
+                                <Form.Footer>
+                                    <Button
+                                        type="submit"
+                                        color="primary" block>
+                                        Войти
+                                    </Button>
+                                </Form.Footer>
+                            </Form>
+                        </Card.Body>
+                        <Button color="secondary"
+                                onClick={this.forgotPassword}>
+                            Забыли пароль?
+                        </Button>
+                    </Card>
+                </Grid.Col>
+            </div>
         )
     };
 }

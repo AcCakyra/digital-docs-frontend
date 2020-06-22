@@ -35,14 +35,14 @@ class Wrapper extends React.Component<Props> {
                     itemsObjects: [
                         {
                             value: "Проверить диплом",
-                            to: "/",
+                            to: "/document",
                             icon: "check",
                             LinkComponent: withRouter(NavLink),
                             useExact: true,
                         },
                         {
                             value: "Мой ВУЗ",
-                            to: "/home",
+                            to: "/",
                             icon: "home",
                             LinkComponent: withRouter(NavLink),
                             useExact: true,

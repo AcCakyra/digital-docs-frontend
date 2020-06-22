@@ -31,7 +31,7 @@ class HomePage extends React.Component {
                 email={this.state.user.Email}
                 role={this.state.user.Role}>
                 <Page.Content>
-                    <Grid.Row cards={true}>
+                    <Grid.Row>
                         <Grid.Col width={12} sm={12} md={7} lg={7}>
                             <Card>
                                 <Card.Header>
