@@ -5,7 +5,6 @@ import {
 } from "tabler-react";
 
 import Wrapper from "./Wrapper";
-import UserService from "../services/UserService";
 
 class DocumentPage extends React.Component {
 
@@ -17,22 +16,9 @@ class DocumentPage extends React.Component {
     }
 
     componentDidMount(): void {
-        if (sessionStorage.getItem('user') === null) {
-            this.getMe().then(user => {
-                sessionStorage.setItem('user', JSON.stringify(user));
-                this.setState({
-                    user: JSON.parse(sessionStorage.user)
-                })
-            })
-        } else {
-            this.setState({
-                user: JSON.parse(sessionStorage.user)
-            })
-        }
-    }
-
-    getMe = () => {
-        return UserService.getMe();
+        this.setState({
+            user: JSON.parse(sessionStorage.user)
+        })
     }
 
     render(): React.ReactNode {
@@ -42,66 +28,53 @@ class DocumentPage extends React.Component {
         return (
             <Wrapper
                 email={this.state.user.Email}
-                role={this.state.user.Role}>
+                role={this.state.user.Role}
+                organization={this.state.user.OrganizationName}>
                 <Page.Content>
-                    <Grid.Row cards={true}>
-                        <Grid.Col lg={8}>
-                            <Card>
-                                <Card.Header>
-                                    <Card.Title>
-                                        Запрос диплома из ВУЗа партнера
-                                    </Card.Title>
-                                </Card.Header>
-                                <Card.Body>
-                                    <Form>
-                                        <Form.Group className="mb-md-5" label="ВУЗ">
-                                            <Form.Select name="university">
-                                                {
-                                                    Object.values(this.state.user.AllowAccessTo)
-                                                        .map(function (org) {
-                                                                return <option>{org}</option>
-                                                            }
-                                                        )
-                                                }
-                                            </Form.Select>
-                                        </Form.Group>
-                                        <Form.Group className="mb-md-5" label="Номер диплома">
-                                            <Form.Input type="text" placeholder="3432423424"/>
-                                        </Form.Group>
-                                        <Form.Group className="mb-md-5" label="Имя">
-                                            <Form.Input type="text" placeholder="Василий"/>
-                                        </Form.Group>
-                                        <Form.Group className="mb-md-5" label="Фамилия">
-                                            <Form.Input type="text" placeholder="Васильев"/>
-                                        </Form.Group>
-                                        <Form.Group className="mb-md-5" label="Специальность">
-                                            <Form.Input type="text" placeholder="Программная инженерия"/>
-                                        </Form.Group>
-                                        <Form.Group className="mb-md-5" label="Год выпуска">
-                                            <Form.Input type="text" placeholder="2020"/>
-                                        </Form.Group>
-                                        <Form.Footer>
-                                            <Button color="primary" block>
-                                                Получить
-                                            </Button>
-                                        </Form.Footer>
-                                    </Form>
-                                </Card.Body>
-                            </Card>
-                            <Card>
-                                <Card.Header>
-                                    <Card.Title>
-                                        Проверка образовательного документа
-                                    </Card.Title>
-                                </Card.Header>
-                                <Card.Body>
-                                    <Form.Group label="Выберите файл для проверки">
-                                        <Form.FileInput />
+                    <Grid.Col lg={8}>
+                        <Card>
+                            <Card.Header>
+                                <Card.Title>
+                                    Запрос диплома из ВУЗа партнера
+                                </Card.Title>
+                            </Card.Header>
+                            <Card.Body>
+                                <Form>
+                                    <Form.Group className="mb-md-5" label="ВУЗ">
+                                        <Form.Select name="university">
+                                            {
+                                                Object.values(this.state.user.AllowAccessTo)
+                                                    .map(function (org) {
+                                                            return <option>{org}</option>
+                                                        }
+                                                    )
+                                            }
+                                        </Form.Select>
                                     </Form.Group>
-                                </Card.Body>
-                            </Card>
-                        </Grid.Col>
-                    </Grid.Row>
+                                    <Form.Group className="mb-md-5" label="Номер диплома">
+                                        <Form.Input type="text" placeholder="3432423424"/>
+                                    </Form.Group>
+                                    <Form.Group className="mb-md-5" label="Имя">
+                                        <Form.Input type="text" placeholder="Василий"/>
+                                    </Form.Group>
+                                    <Form.Group className="mb-md-5" label="Фамилия">
+                                        <Form.Input type="text" placeholder="Васильев"/>
+                                    </Form.Group>
+                                    <Form.Group className="mb-md-5" label="Специальность">
+                                        <Form.Input type="text" placeholder="Программная инженерия"/>
+                                    </Form.Group>
+                                    <Form.Group className="mb-md-5" label="Год выпуска">
+                                        <Form.Input type="text" placeholder="2020"/>
+                                    </Form.Group>
+                                    <Form.Footer>
+                                        <Button color="primary" block>
+                                            Получить
+                                        </Button>
+                                    </Form.Footer>
+                                </Form>
+                            </Card.Body>
+                        </Card>
+                    </Grid.Col>
                 </Page.Content>
             </Wrapper>
         )

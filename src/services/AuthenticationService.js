@@ -12,8 +12,9 @@ axiosInstance.interceptors.response.use(
         if (error.request.responseURL.indexOf("/api/refresh") !== -1 ) {
             window.location = '/login';
         }
-        if (401 === error.response.status) {
-            // runWithLock('auth-key', () => {
+        else {
+            if (401 === error.response.status) {
+                // runWithLock('auth-key', () => {
                 AuthenticationService.updateAuthTokens()
                     .then(() => {
                         return axiosInstance.request(error.config);
@@ -21,9 +22,10 @@ axiosInstance.interceptors.response.use(
                     .catch(() => {
                         window.location = '/login';
                     })
-            // }, {timeout: 5000});
-        } else {
-            return Promise.reject(error);
+                // }, {timeout: 5000});
+            } else {
+                return Promise.reject(error);
+            }
         }
     }
 );

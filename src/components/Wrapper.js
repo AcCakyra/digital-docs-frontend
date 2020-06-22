@@ -24,7 +24,7 @@ class Wrapper extends React.Component<Props> {
                     alt: "Digital docs",
                     imageURL: "./images/tusur_logo.png",
                     accountDropdown: {
-                        name: this.props.email,
+                        name: this.props.email + " | " +  this.props.organization,
                         description: this.props.role,
                         options: [
                             {icon: "log-out", value: "Выйти", onClick: this.logout},
@@ -34,16 +34,16 @@ class Wrapper extends React.Component<Props> {
                 navProps={{
                     itemsObjects: [
                         {
-                            value: "Проверить диплом",
-                            to: "/document",
-                            icon: "check",
+                            value: "Мой ВУЗ",
+                            to: "/",
+                            icon: "home",
                             LinkComponent: withRouter(NavLink),
                             useExact: true,
                         },
                         {
-                            value: "Мой ВУЗ",
-                            to: "/",
-                            icon: "home",
+                            value: "Проверить диплом",
+                            to: "/document",
+                            icon: "check",
                             LinkComponent: withRouter(NavLink),
                             useExact: true,
                         }
