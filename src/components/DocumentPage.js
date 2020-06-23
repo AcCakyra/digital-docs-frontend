@@ -1,13 +1,14 @@
 import * as React from "react";
 
-import DocumentService from "./../services/DocumentService";
-
 import {
     Grid, Card, Form, Button, Page, ContactCard, Alert, List,
 } from "tabler-react";
 
 import Wrapper from "./Wrapper";
+
+import DocumentService from "./../services/DocumentService";
 import LogoUtil from "../services/util/LogoUtil";
+import NameUtil from "../services/util/NameUtil";
 
 class DocumentPage extends React.Component {
 
@@ -88,12 +89,10 @@ class DocumentPage extends React.Component {
                                         <Form.Group label="ВУЗ">
                                             <Form.SelectGroup pills>
                                                 {
-
                                                     Object.values(this.state.user.AllowAccessTo)
                                                         .map(function (org) {
                                                                 return <div>
                                                                     <Form.SelectGroupItem
-                                                                        checked
                                                                         value={org}
                                                                         name="university"
                                                                         label={
@@ -112,7 +111,7 @@ class DocumentPage extends React.Component {
                                             </Form.SelectGroup>
                                         </Form.Group>
                                         <Form.Group label="Номер диплома">
-                                            <Form.Input name="number" type="text" placeholder="1222"/>
+                                            <Form.Input name="number" type="text" placeholder="1111"/>
                                         </Form.Group>
                                         <Form.Group label="Имя">
                                             <Form.Input name="firstName" type="text" placeholder="Евгений"/>
@@ -145,7 +144,7 @@ class DocumentPage extends React.Component {
                                     objectURL={LogoUtil.getLogoByName(this.state.university)}
                                     name={this.state.university}
                                     address={{
-                                        line1: "Томский Политехнический университет",
+                                        line1: NameUtil.getFullNameByUniversity(this.state.university),
                                     }}
                                     details={[
                                         {title: "Имя", content: this.state.document.fullName},
