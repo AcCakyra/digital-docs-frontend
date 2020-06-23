@@ -6,6 +6,7 @@ import {
 
 import Wrapper from "./Wrapper";
 import UserService from "../services/UserService";
+import LogoUtil from "../services/util/LogoUtil";
 
 class HomePage extends React.Component {
 
@@ -17,7 +18,7 @@ class HomePage extends React.Component {
     }
 
     componentDidMount(): void {
-        if (sessionStorage.getItem('user') === null) {
+        if (this.isSessionStorageEmpty()) {
             this.getMe().then(user => {
                 sessionStorage.setItem('user', JSON.stringify(user));
                 this.setState({
@@ -29,6 +30,10 @@ class HomePage extends React.Component {
                 user: JSON.parse(sessionStorage.user)
             })
         }
+    }
+
+    isSessionStorageEmpty = () => {
+        return (sessionStorage.getItem('user') === null || sessionStorage.getItem('user') === 'undefined')
     }
 
     getMe = () => {
@@ -85,7 +90,11 @@ class HomePage extends React.Component {
                                         {
                                             Object.values(this.state.user.AllowAccessTo)
                                                 .map(function (org) {
-                                                        return <List.GroupItem action icon="bookmark">{org}</List.GroupItem>
+                                                        return <List.GroupItem action>
+                                                            <img src={LogoUtil.getSmallLogoByName(org)}/>
+                                                            {" "}
+                                                            {org}
+                                                        </List.GroupItem>
                                                     }
                                                 )
                                         }

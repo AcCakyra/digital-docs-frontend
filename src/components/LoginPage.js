@@ -34,7 +34,7 @@ class LoginPage extends React.Component {
             return
         }
 
-        await AuthenticationService.login(email, password).then(r => {
+        await AuthenticationService.login(email, password).then(() => {
             this.props.history.push('/');
         }).catch(() => {
             this.setState({

@@ -4,7 +4,9 @@ const UserService = {
     getMe() {
         return axiosInstance.get('/api/userinfo')
             .then(user => {
-                return user.data
+                if (user && user.data) {
+                    return user.data
+                }
             })
     },
 };
