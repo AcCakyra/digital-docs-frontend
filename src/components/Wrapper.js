@@ -24,7 +24,7 @@ class Wrapper extends React.Component<Props> {
                     alt: "Digital docs",
                     imageURL: "./images/tusur_logo.png",
                     accountDropdown: {
-                        name: this.props.email + " | " +  this.props.organization,
+                        name: this.props.email + " | " + this.props.organization,
                         description: this.props.role,
                         options: [
                             {icon: "log-out", value: "Выйти", onClick: this.logout},

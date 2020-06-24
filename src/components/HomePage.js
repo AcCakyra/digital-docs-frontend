@@ -22,12 +22,12 @@ class HomePage extends React.Component {
             this.getMe().then(user => {
                 sessionStorage.setItem('user', JSON.stringify(user));
                 this.setState({
-                    user: JSON.parse(sessionStorage.user)
+                    user: JSON.parse(sessionStorage.getItem('user'))
                 })
             })
         } else {
             this.setState({
-                user: JSON.parse(sessionStorage.user)
+                user: JSON.parse(sessionStorage.getItem('user'))
             })
         }
     }
@@ -78,7 +78,7 @@ class HomePage extends React.Component {
                                 footer={this.state.user.OrganizationName}
                             />
                         </Grid.Col>
-                        <Grid.Col className="ml-9" width={12} sm={12} md={6} lg={6}>
+                        <Grid.Col className="mx-auto" width={12} sm={12} md={6} lg={6}>
                             <Card>
                                 <Card.Header>
                                     <Card.Title>

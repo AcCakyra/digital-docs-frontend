@@ -55,7 +55,7 @@ class LoginPage extends React.Component {
     render(): React.ReactNode {
         return (
             <div className="page">
-                <Grid.Col lg={5} md={7} sm={8} xs={9} className="mx-auto">
+                <Grid.Col width={11} lg={5} md={7} sm={8} xs={9} className="mx-auto">
                     {this.state.error !== "" ?
                         <Alert type="danger" icon="alert-triangle">
                             {this.state.error}
