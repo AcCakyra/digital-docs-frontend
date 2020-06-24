@@ -1,5 +1,5 @@
 import qs from 'qs'
-import {runWithLock} from "localstorage-lock";
+// import {runWithLock} from "localstorage-lock";
 import axiosInstance from "./index";
 
 // put mutex into localstorage

@@ -21,9 +21,11 @@ class HomePage extends React.Component {
         if (this.isSessionStorageEmpty()) {
             this.getMe().then(user => {
                 sessionStorage.setItem('user', JSON.stringify(user));
-                this.setState({
-                    user: JSON.parse(sessionStorage.getItem('user'))
-                })
+                if (user) {
+                    this.setState({
+                        user: user
+                    })
+                }
             })
         } else {
             this.setState({
@@ -91,7 +93,8 @@ class HomePage extends React.Component {
                                             Object.values(this.state.user.AllowAccessTo)
                                                 .map(function (org) {
                                                         return <List.GroupItem action>
-                                                            <img src={LogoUtil.getSmallLogoByName(org)}/>
+                                                            <img src={LogoUtil.getSmallLogoByName(org)}
+                                                                 alt={'*'}/>
                                                             {" "}
                                                             {org}
                                                         </List.GroupItem>

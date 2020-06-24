@@ -7,6 +7,8 @@ const LogoUtil = {
                 return "images/tpu_logo.jpg"
             case "ТУСУР" :
                 return "images/tusur_logo.jpg"
+            default:
+                return ""
         }
     },
     getSmallLogoByName(university) {
@@ -17,6 +19,8 @@ const LogoUtil = {
                 return "images/tpu_logo_small.jpg"
             case "ТУСУР" :
                 return "images/tusur_logo_small.jpg"
+            default:
+                return ""
         }
     },
 };

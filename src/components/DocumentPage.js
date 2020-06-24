@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import {
-    Grid, Card, Form, Button, Page, ContactCard, Alert, List,
+    Grid, Card, Form, Button, Page, ContactCard, Alert,
 } from "tabler-react";
 
 import Wrapper from "./Wrapper";
@@ -97,7 +97,9 @@ class DocumentPage extends React.Component {
                                                                         name="university"
                                                                         label={
                                                                             <div>
-                                                                                <img src={LogoUtil.getSmallLogoByName(org)}/>
+                                                                                <img src={LogoUtil.getSmallLogoByName(org)}
+                                                                                     alt={'*'}
+                                                                                />
                                                                                 {" "}
                                                                                 {org}
                                                                             </div>
