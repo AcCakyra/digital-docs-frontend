@@ -18,12 +18,12 @@ class HomePage extends React.Component {
     }
 
     componentDidMount(): void {
-        if (this.isSessionStorageEmpty()) {
+        if (this.isUserInfoEmpty(sessionStorage.getItem('user'))) {
             this.getMe().then(user => {
                 sessionStorage.setItem('user', JSON.stringify(user));
-                if (user) {
+                if (!this.isUserInfoEmpty(sessionStorage.getItem('user'))) {
                     this.setState({
-                        user: user
+                        user: JSON.parse(sessionStorage.getItem('user'))
                     })
                 }
             })
@@ -34,8 +34,8 @@ class HomePage extends React.Component {
         }
     }
 
-    isSessionStorageEmpty = () => {
-        return (sessionStorage.getItem('user') === null || sessionStorage.getItem('user') === 'undefined')
+    isUserInfoEmpty = (user) => {
+        return (user === null || user === 'undefined')
     }
 
     getMe = () => {
