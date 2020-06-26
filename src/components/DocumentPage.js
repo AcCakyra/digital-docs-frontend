@@ -44,10 +44,17 @@ class DocumentPage extends React.Component {
             noDiploma: null,
         })
 
-        await DocumentService.fetchDocument(universityId, number, firstName, secondName, spec, year).then(document => {
-            if (document && document !== 'undefined') {
+        let diploma = this.fetchDocument(universityId, number, firstName, secondName, spec, year);
+        if (diploma !== null) {
+            this.setState({
+                document: diploma,
+                university: university,
+            })
+        } else {
+            diploma = this.fetchDocument(universityId, number, firstName, secondName, spec, year);
+            if (diploma) {
                 this.setState({
-                    document: document,
+                    document: diploma,
                     university: university,
                 })
             } else {
@@ -55,12 +62,18 @@ class DocumentPage extends React.Component {
                     noDiploma: true,
                 })
             }
-        }).catch(() => {
-            this.setState({
-                noDiploma: true,
-            })
-        });
+        }
     };
+
+    async fetchDocument(universityId, number, firstName, secondName, spec, year) {
+        await DocumentService.fetchDocument(universityId, number, firstName, secondName, spec, year).then(document => {
+            if (document && document !== 'undefined') {
+                return document;
+            } else {
+                return null;
+            }
+        })
+    }
 
     getKeyByValue = (object, value) => {
         return Object.keys(object).find(key => object[key] === value);
