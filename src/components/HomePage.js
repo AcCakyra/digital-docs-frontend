@@ -17,14 +17,16 @@ class HomePage extends React.Component {
         };
     }
 
-    componentDidMount(): void {
-        if (this.isUserInfoEmpty(sessionStorage.getItem('user'))) {
+    componentDidMount = () => {
+        if (!sessionStorage.getItem('user') || sessionStorage.getItem('user') === 'undefined') {
             this.getMe().then(user => {
                 sessionStorage.setItem('user', JSON.stringify(user));
-                if (!this.isUserInfoEmpty(sessionStorage.getItem('user'))) {
+                if (sessionStorage.getItem('user') && sessionStorage.getItem('user') !== 'undefined') {
                     this.setState({
                         user: JSON.parse(sessionStorage.getItem('user'))
                     })
+                } else {
+                    window.location = '/login';
                 }
             })
         } else {
@@ -32,10 +34,6 @@ class HomePage extends React.Component {
                 user: JSON.parse(sessionStorage.getItem('user'))
             })
         }
-    }
-
-    isUserInfoEmpty = (user) => {
-        return (user === null || user === 'undefined')
     }
 
     getMe = () => {
