@@ -11,21 +11,23 @@ axiosInstance.interceptors.response.use(
     }, function (error) {
         if (error.request.responseURL.indexOf("/refresh") !== -1) {
             window.location = '/login';
-            return error;
-        }
-        if (error.request.responseURL.indexOf("/auth") !== -1) {
+
+        } else if (error.request.responseURL.indexOf("/auth") !== -1) {
             return Promise.reject(error);
-        }
-        if (401 === error.response.status) {
+        } else if (401 === error.response.status) {
             // runWithLock('auth-key', () => {
             AuthenticationService.updateAuthTokens()
                 .then(() => {
                     return axiosInstance.request(error.config);
                 })
+                .catch(() => {
+                    window.location = '/login';
+                })
             // }, {timeout: 5000});
         } else {
             return Promise.reject(error);
         }
+
     }
 );
 
