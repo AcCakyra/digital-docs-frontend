@@ -28,7 +28,7 @@ class DocumentPage extends React.Component {
         })
     }
 
-    getDocument = async (e) => {
+    getDocument = (e) => {
         e.preventDefault();
 
         const university = e.target.university.value;
@@ -44,35 +44,30 @@ class DocumentPage extends React.Component {
             noDiploma: null,
         })
 
-        let diploma = this.fetchDocument(universityId, number, firstName, secondName, spec, year);
-        if (diploma !== null) {
-            this.setState({
-                document: diploma,
-                university: university,
-            })
-        } else {
-            diploma = this.fetchDocument(universityId, number, firstName, secondName, spec, year);
+        DocumentService.fetchDocument(universityId, number, firstName, secondName, spec, year).then(diploma => {
             if (diploma) {
                 this.setState({
                     document: diploma,
                     university: university,
                 })
             } else {
-                this.setState({
-                    noDiploma: true,
-                })
-            }
-        }
-    };
-
-    async fetchDocument(universityId, number, firstName, secondName, spec, year) {
-        await DocumentService.fetchDocument(universityId, number, firstName, secondName, spec, year).then(document => {
-            if (document && document !== 'undefined') {
-                return document;
-            } else {
-                return null;
+                this.sleep().then(r => {
+                    DocumentService.fetchDocument(universityId, number, firstName, secondName, spec, year).then(diploma2 => {
+                        if (diploma2) {
+                            this.setState({
+                                document: diploma2,
+                                university: university,
+                            })
+                        }
+                    })
+                });
             }
         })
+
+    };
+
+    async sleep() {
+        await new Promise(r => setTimeout(r, 220));
     }
 
     getKeyByValue = (object, value) => {
